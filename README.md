@@ -2,7 +2,7 @@
 <h3 align="center">Aspiring Technical Support Engineer | Web Developer | BCA Graduate (2026)</h3>
 
 <p align="center">
-  <a href="http://www.linkedin.com/in/kishoremurugesa" target="_blank">
+  <a href="https://www.linkedin.com/in/kishore-murugesan44/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
   <a href="mailto:kishoremurugesan1409@gmail.com">
