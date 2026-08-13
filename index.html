@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Emergency Accident Alert System</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <div>
+      <h1>VEAAS<span class="brand-sub">Vehicle Emergency Accident Alert System</span></h1>
+    </div>
+  </div>
+  <div class="topbar-status">
+    <div class="status-chip" id="monitoringChip">
+      <span class="dot dot-live"></span> MONITORING
+    </div>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</header>
+
+<main class="grid">
+
+  <!-- LEFT: Telemetry -->
+  <section class="panel telemetry-panel">
+    <h2 class="panel-title">Live Telemetry</h2>
+
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 200 120" class="gauge">
+        <path d="M 15 105 A 85 85 0 0 1 185 105" class="gauge-track"/>
+        <path d="M 15 105 A 85 85 0 0 1 185 105" class="gauge-fill" id="gaugeFill"/>
+      </svg>
+      <div class="gauge-readout">
+        <span id="gForceValue">1.00</span>
+        <span class="gauge-unit">g-force</span>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric">
+        <span class="metric-label">Speed</span>
+        <span class="metric-value" id="speedValue">0.0<small>km/h</small></span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Accel X</span>
+        <span class="metric-value mono" id="accelX">0.000</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Accel Y</span>
+        <span class="metric-value mono" id="accelY">0.000</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Accel Z</span>
+        <span class="metric-value mono" id="accelZ">0.000</span>
+      </div>
+    </div>
+
+    <div class="threshold-note">
+      Impact threshold: <span id="thresholdValue">4.0</span>g — readings at or
+      above this trigger an automatic alert dispatch.
+    </div>
+
+    <canvas id="sparkline" height="70"></canvas>
+  </section>
+
+  <!-- CENTER: Map + Trigger -->
+  <section class="panel map-panel">
+    <h2 class="panel-title">Live Location</h2>
+    <div id="map"></div>
+    <div class="coords mono" id="coordsReadout">-- , --</div>
+
+    <button id="crashBtn" class="crash-btn">
+      <span class="crash-btn-ring"></span>
+      <span class="crash-btn-label">SIMULATE<br>IMPACT</span>
+    </button>
+    <p class="crash-hint">Trigger a simulated collision to test the detection &amp; alert pipeline — no real crash hardware needed for this demo.</p>
+  </section>
+
+  <!-- RIGHT: Alert Log -->
+  <section class="panel alert-panel">
+    <h2 class="panel-title">
+      Alert Log
+      <span class="alert-count" id="alertCount">0</span>
+    </h2>
+    <div class="alert-list" id="alertList">
+      <div class="alert-empty">No accidents detected. System nominal.</div>
+    </div>
+  </section>
+
+</main>
+
+<div class="alert-banner" id="alertBanner">
+  <div class="alert-banner-inner">
+    <strong>⚠ ACCIDENT DETECTED</strong>
+    <span id="bannerDetail"></span>
+  </div>
+</div>
+
+<footer class="footer">
+  Academic Project · Python + Flask · Simulated GPS &amp; Accelerometer Data
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
