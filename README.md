@@ -1,4 +1,4 @@
-# 🚨 Vehicle Emergency Accident Alert System
+# 🚨 Vehicle Accident Emergency Alert System
 
 An academic project that detects vehicle accidents automatically using
 accelerometer (impact) data and reports real-time GPS location to
